@@ -1,0 +1,13 @@
+{
+  "name": "@styu/stylelint-config-default",
+  "version": "0.0.0",
+  "main": "index.js",
+  "scripts": {
+    "stylelint": "echo 'Cache bust'"
+  },
+  "dependencies": {
+    "stylelint": "^15.11.0",
+    "stylelint-config-standard-scss": "^11.0.0",
+    "stylelint-order": "^6.0.3"
+  }
+}

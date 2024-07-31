@@ -1,0 +1,15 @@
+{
+  "name": "@styu/configs",
+  "version": "0.0.0",
+  "description": "Various infra configuration for personal projects",
+  "main": "index.js",
+  "repository": "git@github.com:styu/configs.git",
+  "author": "Stephanie Yu <styu314@gmail.com>",
+  "license": "MIT",
+  "private": true,
+  "packageManager": "yarn@4.3.1",
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ]
+}
