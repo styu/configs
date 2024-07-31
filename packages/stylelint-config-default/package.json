@@ -10,5 +10,8 @@
     "stylelint-config-standard-scss": "^11.0.0",
     "stylelint-order": "^6.0.3"
   },
-  "repository": "https://github.com/styu/configs.git"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/styu/configs.git"
+  }
 }
