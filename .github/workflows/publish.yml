@@ -3,7 +3,7 @@ on:
   release:
     types: [published]
 jobs:
-  build:
+  publish:
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -23,7 +23,7 @@ jobs:
             VERSION_TO_PUBLISH="${RELEASE_TAG##*@}"
             echo "Found tag ${VERSION_TO_PUBLISH}, publishing"
             cd packages/eslint-config-default
-            yarn npm publish --tag $VERSION_TO_PUBLISH
+            npm publish --tag $VERSION_TO_PUBLISH
           else
             echo "No tag found, skipping"
           fi
@@ -37,7 +37,7 @@ jobs:
               VERSION_TO_PUBLISH="${RELEASE_TAG##*@}"
               echo "Found tag ${VERSION_TO_PUBLISH}, publishing"
               cd packages/stylelint-config-default
-              yarn npm publish --tag $VERSION_TO_PUBLISH
+              npm publish --tag $VERSION_TO_PUBLISH
           else
               echo "No tag found, skipping"
           fi
