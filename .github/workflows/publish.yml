@@ -1,0 +1,45 @@
+name: Publish package to GitHub Packages
+on:
+  release:
+    types: [published]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20.x"
+          cache: yarn
+      - run: yarn install --immutable
+      - name: Publish @styu/eslint-config-default
+        run: |
+          RELEASE_TAG=${{ github.event.release.tag_name }}
+          TAG_TO_CHECK=@styu/eslint-config-default
+          if [ $RELEASE_TAG == $TAG_TO_CHECK* ]; then
+            echo "Found tag, publishing"
+            VERSION_TO_PUBLISH="${RELEASE_TAG##*@}"
+            cd packages/eslint-config-default
+            yarn npm publish --tag $VERSION_TO_PUBLISH
+          else
+            echo "No tag found, skipping"
+          fi
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Publish @styu/stylelint-config-default
+        run: |
+          RELEASE_TAG=${{ github.event.release.tag_name }}
+          TAG_TO_CHECK=@styu/stylelint-config-default
+          if [ $RELEASE_TAG == $TAG_TO_CHECK* ]; then
+              echo "Found tag, publishing"
+              VERSION_TO_PUBLISH="${RELEASE_TAG##*@}"
+              cd packages/stylelint-config-default
+              yarn npm publish --tag $VERSION_TO_PUBLISH
+          else
+              echo "No tag found, skipping"
+          fi
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
